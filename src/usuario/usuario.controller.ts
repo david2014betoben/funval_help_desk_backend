@@ -20,7 +20,6 @@ import { RolesGuard } from '../common/guards/roles.guard.js';
 
 @ApiBearerAuth('JWT-auth')
 @UseGuards(JwtAuthGuard, RolesGuard)
-@Roles('ADMIN')
 @Controller('usuario')
 export class UsuarioController {
   constructor(private readonly usuarioService: UsuarioService) {}
@@ -44,6 +43,7 @@ export class UsuarioController {
     return this.usuarioService.findOne(+id);
   }
 
+  @Roles('ADMIN')
   @ApiOperation({
     summary: 'Actualiza algun dato de un Usuario identificado por su ID',
   })
@@ -52,6 +52,7 @@ export class UsuarioController {
     return this.usuarioService.update(+id, updateUsuarioDto);
   }
 
+  @Roles('ADMIN')
   @ApiOperation({ summary: 'Elimina un Usuario identificado por su ID' })
   @Delete(':id')
   remove(@Param('id') id: string) {

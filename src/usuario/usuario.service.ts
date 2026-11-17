@@ -28,7 +28,7 @@ export class UsuarioService {
   }
 
   async findOne(id: number) {
-    return await this.prisma.usuario.findMany({
+    return await this.prisma.usuario.findFirst({
       where: { id },
       omit: { password: true },
     });

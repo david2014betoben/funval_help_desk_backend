@@ -7,7 +7,6 @@ import {
   EstadoTicket,
   PrioridadTarea,
 } from '../src/prisma/generated/prisma/enums.js';
-import { Decimal } from '@prisma/client/runtime/client';
 import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient({
@@ -18,8 +17,8 @@ async function main() {
   console.log('Iniciando limpieza completa de la base de datos...');
 
   // 1. Eliminacion de registros en tablas existentes
-  await prisma.categoria.deleteMany();
   await prisma.tarea.deleteMany();
+  await prisma.categoria.deleteMany();
   await prisma.usuario.deleteMany();
   await prisma.comentario.deleteMany();
   await prisma.notificacion.deleteMany();
