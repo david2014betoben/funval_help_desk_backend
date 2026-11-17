@@ -18,11 +18,13 @@ async function main() {
   console.log('Iniciando limpieza completa de la base de datos...');
 
   // 1. Eliminacion de registros en tablas existentes
-  await prisma.categoria.deleteMany();
-  await prisma.tarea.deleteMany();
-  await prisma.usuario.deleteMany();
-  await prisma.comentario.deleteMany();
-  await prisma.notificacion.deleteMany();
+  await prisma.$transaction([
+    prisma.notificacion.deleteMany(),
+    prisma.comentario.deleteMany(),
+    prisma.tarea.deleteMany(),
+    prisma.categoria.deleteMany(),
+    prisma.usuario.deleteMany(),
+  ]);
 
   // 2. Reinicio de contadores de ID para las tablas
   await prisma.$executeRawUnsafe(
