@@ -7,7 +7,6 @@ import {
   EstadoTicket,
   PrioridadTarea,
 } from '../src/prisma/generated/prisma/enums.js';
-import { Decimal } from '@prisma/client/runtime/client';
 import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient({
